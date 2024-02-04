@@ -1,4 +1,4 @@
-package com.xm.cryptorecommendationservice.domain;
+package com.xm.cryptorecommendationservice.common.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

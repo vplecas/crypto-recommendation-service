@@ -1,7 +1,7 @@
-package com.xm.cryptorecommendationservice.mapper;
+package com.xm.cryptorecommendationservice.data.mapper;
 
-import com.xm.cryptorecommendationservice.domain.Crypto;
-import com.xm.cryptorecommendationservice.domain.CryptoDto;
+import com.xm.cryptorecommendationservice.common.domain.Crypto;
+import com.xm.cryptorecommendationservice.common.domain.CryptoDto;
 
 public class CryptoMapper {
 

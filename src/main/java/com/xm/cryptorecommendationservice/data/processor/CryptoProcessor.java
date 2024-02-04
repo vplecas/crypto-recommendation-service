@@ -1,8 +1,8 @@
-package com.xm.cryptorecommendationservice.config;
+package com.xm.cryptorecommendationservice.data.processor;
 
-import com.xm.cryptorecommendationservice.domain.Crypto;
-import com.xm.cryptorecommendationservice.domain.CryptoDto;
-import com.xm.cryptorecommendationservice.exception.BatchSkipException;
+import com.xm.cryptorecommendationservice.common.domain.Crypto;
+import com.xm.cryptorecommendationservice.common.domain.CryptoDto;
+import com.xm.cryptorecommendationservice.common.exception.BatchSkipException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;

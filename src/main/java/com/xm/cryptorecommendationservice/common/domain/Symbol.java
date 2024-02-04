@@ -1,11 +1,11 @@
-package com.xm.cryptorecommendationservice.domain;
+package com.xm.cryptorecommendationservice.common.domain;
 
 public enum Symbol {
 
     BTC("Bitcoin"),
     DOGE("Dogecoin"),
-    ETHEREUM("Ethereum"),
-    LITECOIN("Litecoin"),
+    ETH("Ethereum"),
+    LTC("Litecoin"),
     XRP("XRP");
 
     private final String label;

@@ -1,6 +1,6 @@
-package com.xm.cryptorecommendationservice.config;
+package com.xm.cryptorecommendationservice.data.policies;
 
-import com.xm.cryptorecommendationservice.exception.BatchSkipException;
+import com.xm.cryptorecommendationservice.common.exception.BatchSkipException;
 import org.springframework.batch.core.step.skip.SkipLimitExceededException;
 import org.springframework.batch.core.step.skip.SkipPolicy;
 

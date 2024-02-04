@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  mysqldb:
+    image: "mysql:latest"
+    restart: always
+    ports:
+      - 3306:3306
+#    networks:
+#      - springapimysql-net
+    environment:
+      MYSQL_DATABASE: cryptos
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+
+#networks:
+#  springapimysql-net:

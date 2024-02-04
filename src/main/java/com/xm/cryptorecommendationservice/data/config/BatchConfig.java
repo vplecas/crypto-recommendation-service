@@ -1,8 +1,11 @@
-package com.xm.cryptorecommendationservice.config;
+package com.xm.cryptorecommendationservice.data.config;
 
-import com.xm.cryptorecommendationservice.domain.Crypto;
-import com.xm.cryptorecommendationservice.domain.CryptoDto;
-import com.xm.cryptorecommendationservice.mapper.CryptoFieldSetMapper;
+import com.xm.cryptorecommendationservice.common.domain.Crypto;
+import com.xm.cryptorecommendationservice.common.domain.CryptoDto;
+import com.xm.cryptorecommendationservice.data.mapper.CryptoFieldSetMapper;
+import com.xm.cryptorecommendationservice.data.policies.CryptoSkipPolicy;
+import com.xm.cryptorecommendationservice.data.processor.CryptoProcessor;
+import com.xm.cryptorecommendationservice.data.writer.CryptoWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -12,14 +15,13 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
-import org.springframework.core.task.TaskExecutor;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @Configuration
 @EnableBatchProcessing
@@ -32,13 +34,11 @@ public class BatchConfig {
 
 //    private final CryptoRepository cryptoRepository;
 
-    @Value("classPath:/input/${input.fileName}")
-    private Resource inputFile;
+    @Value("classpath:/input/*.csv")
+    private Resource[] resources;
 
     @Bean
     public Job readAndPersistJob() {
-        System.out.println("VELJKOOOOO");
-
         return jobBuilderFactory
                 .get("readAndPersistJob")
                 .incrementer(new RunIdIncrementer())
@@ -49,24 +49,31 @@ public class BatchConfig {
     @Bean
     public Step readAndPersistStep() {
         CryptoSkipPolicy skipPolicy = new CryptoSkipPolicy();
-        System.out.println("VELJKOOOOO");
 
         return stepBuilderFactory
                 .get("readAndPersistStep")
                 .<CryptoDto, Crypto>chunk(50)
-                .reader(cryptoCsvReader())
+                .reader(multiResourceItemReader())
                 .processor(cryptoProcessor())
                 .writer(cryptoWriter())
                 .faultTolerant()
                 .skipPolicy(skipPolicy)
-                .taskExecutor(taskExecutor())
                 .build();
+    }
+
+    @Bean
+    public MultiResourceItemReader<CryptoDto> multiResourceItemReader()
+    {
+        MultiResourceItemReader<CryptoDto> resourceItemReader = new MultiResourceItemReader<>();
+        resourceItemReader.setDelegate(cryptoCsvReader());
+        resourceItemReader.setResources(resources);
+
+        return resourceItemReader;
     }
 
     @Bean
     public FlatFileItemReader<CryptoDto> cryptoCsvReader() {
         DelimitedLineTokenizer delimitedLineTokenizer = new DelimitedLineTokenizer();
-        System.out.println("VELJKOOOOO");
         delimitedLineTokenizer.setNames("timestamp", "symbol", "price");
 
         DefaultLineMapper<CryptoDto> defaultLineMapper = new DefaultLineMapper<>();
@@ -75,7 +82,6 @@ public class BatchConfig {
 
         FlatFileItemReader<CryptoDto> reader = new FlatFileItemReader<>();
         reader.setLineMapper(defaultLineMapper);
-        reader.setResource(inputFile);
         reader.setLinesToSkip(1);
 
         return reader;
@@ -88,21 +94,7 @@ public class BatchConfig {
 
     @Bean
     public CryptoWriter<Crypto> cryptoWriter() {
-        System.out.println("VELJKOOOOO");
-
         return new CryptoWriter<>();
-    }
-
-    @Bean
-    public TaskExecutor taskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(4);
-        executor.setMaxPoolSize(8);
-        executor.setQueueCapacity(16);
-        executor.setThreadNamePrefix("task exec. - ");
-        executor.initialize();
-
-        return executor;
     }
 
 }

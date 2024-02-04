@@ -1,7 +1,7 @@
-package com.xm.cryptorecommendationservice.mapper;
+package com.xm.cryptorecommendationservice.data.mapper;
 
-import com.xm.cryptorecommendationservice.domain.CryptoDto;
-import com.xm.cryptorecommendationservice.domain.Symbol;
+import com.xm.cryptorecommendationservice.common.domain.CryptoDto;
+import com.xm.cryptorecommendationservice.common.domain.Symbol;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;

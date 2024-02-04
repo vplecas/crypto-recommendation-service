@@ -1,7 +1,7 @@
-package com.xm.cryptorecommendationservice.config;
+package com.xm.cryptorecommendationservice.data.writer;
 
-import com.xm.cryptorecommendationservice.domain.Crypto;
-import com.xm.cryptorecommendationservice.repository.CryptoRepository;
+import com.xm.cryptorecommendationservice.common.domain.Crypto;
+import com.xm.cryptorecommendationservice.common.repository.CryptoRepository;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 

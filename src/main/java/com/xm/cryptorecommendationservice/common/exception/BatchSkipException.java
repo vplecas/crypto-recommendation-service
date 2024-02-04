@@ -1,4 +1,4 @@
-package com.xm.cryptorecommendationservice.exception;
+package com.xm.cryptorecommendationservice.common.exception;
 
 public class BatchSkipException extends RuntimeException {
 

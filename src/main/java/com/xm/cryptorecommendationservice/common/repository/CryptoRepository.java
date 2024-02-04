@@ -1,6 +1,6 @@
-package com.xm.cryptorecommendationservice.repository;
+package com.xm.cryptorecommendationservice.common.repository;
 
-import com.xm.cryptorecommendationservice.domain.Crypto;
+import com.xm.cryptorecommendationservice.common.domain.Crypto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
