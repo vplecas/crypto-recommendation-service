@@ -1,5 +1,7 @@
 package com.xm.cryptorecommendationservice.common.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Symbol {
 
     BTC("Bitcoin"),
@@ -12,6 +14,11 @@ public enum Symbol {
 
     Symbol(String label) {
         this.label = label;
+    }
+
+    @JsonValue
+    public String getJsonValue() {
+        return this.name().toLowerCase();
     }
 
     public String getLabel() {

@@ -26,6 +26,7 @@ public class Crypto {
     private ZonedDateTime timestamp;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Symbol symbol;
 
     @Column
