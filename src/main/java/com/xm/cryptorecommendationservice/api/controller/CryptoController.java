@@ -2,7 +2,6 @@ package com.xm.cryptorecommendationservice.api.controller;
 
 import com.xm.cryptorecommendationservice.api.service.CryptoService;
 import com.xm.cryptorecommendationservice.common.converter.CaseInsensitiveDataConverter;
-import com.xm.cryptorecommendationservice.common.domain.Crypto;
 import com.xm.cryptorecommendationservice.common.domain.Symbol;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
