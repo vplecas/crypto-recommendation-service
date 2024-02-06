@@ -1,0 +1,169 @@
+openapi: 3.0.0
+info:
+  version: "1.1.1"
+  title: Crypto Recommendation
+  description: >
+    Crypto Recommendation API<br/>
+
+servers:
+  - url: 'http://localhost:8080/api'
+
+paths:
+  /v1/crypto/sorted/{order}:
+    get:
+      operationId: cryptoSortedGet
+      summary: Retrieve collection of cryptocurrencies sorted by normalized range
+      description: Retrieve collection of cryptocurrencies sorted by normalized range.
+      tags:
+        - crypto
+      parameters:
+        - name: order
+          description: 'Order by normalized range. Value should be "asc" or "desc". Default is desc.'
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Collection, sorted by normalized range.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                    normalisedRange:
+                      string: double
+
+  /v1/crypto/{symbol}/oldest:
+    get:
+      operationId: cryptoGet
+      summary: Retrieve the oldest cryptocurrency entry for the specified symbol
+      description: Retrieve the oldest cryptocurrency entry for the specified symbol.
+      tags:
+        - crypto
+      parameters:
+        - name: symbol
+          description: 'Cryptocurrency symbol'
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The oldest Cryptocurrency.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Crypto'
+
+  /v1/crypto/{symbol}/newest:
+    get:
+      operationId: cryptoGet
+      summary: Retrieve the newest cryptocurrency entry for the specified symbol
+      description: Retrieve the newest cryptocurrency entry for the specified symbol.
+      tags:
+        - crypto
+      parameters:
+        - name: symbol
+          description: 'Cryptocurrency symbol'
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The newest Cryptocurrency.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Crypto'
+
+  /v1/crypto/{symbol}/max:
+    get:
+      operationId: cryptoGet
+      summary: Retrieve cryptocurrency entry with maximum price for the specified symbol
+      description: Retrieve cryptocurrency entry with maximum price for the specified symbol.
+      tags:
+        - crypto
+      parameters:
+        - name: symbol
+          description: 'Cryptocurrency symbol'
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cryptocurrency with maximum price.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Crypto'
+
+  /v1/crypto/{symbol}/min:
+    get:
+      operationId: cryptoGet
+      summary: Retrieve cryptocurrency entry with minimum price for the specified symbol
+      description: Retrieve cryptocurrency entry with minimum price for the specified symbol.
+      tags:
+        - crypto
+      parameters:
+        - name: symbol
+          description: 'Cryptocurrency symbol'
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cryptocurrency with minimum price.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Crypto'
+
+  /v1/crypto/highestNormalizedRange/{date}:
+    get:
+      operationId: cryptoGet
+      summary: Retrieve cryptocurrency entry with the highest normalised range for specified day
+      description: Retrieve cryptocurrency entry with the highest normalised range for specified day.
+      tags:
+        - crypto
+      parameters:
+        - name: date
+          description: 'Target date, with format dd-MM-yyy'
+          in: path
+          required: true
+          schema:
+            type: date
+      responses:
+        '200':
+          description: Cryptocurrency with the highest normalised range.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  symbol:
+                    type: string
+                  normalizedRange:
+                    type: number
+                    format: double
+
+components:
+  schemas:
+    Crypto:
+      properties:
+        id:
+          type: number
+        timestamp:
+          type: string
+        symbol:
+          type: string
+        price:
+          type: number
+          format: double

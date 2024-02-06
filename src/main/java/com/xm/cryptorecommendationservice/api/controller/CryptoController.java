@@ -23,7 +23,7 @@ public class CryptoController {
         binder.registerCustomEditor(Symbol.class, new CaseInsensitiveDataConverter<>(Symbol.class));
     }
 
-    @GetMapping(path = {"/sorted", "/sorted/{order}"})
+    @GetMapping("/sorted/{order}")
     private MappingJacksonValue findSortedCryptos(@PathVariable("order") String order) {
         return new MappingJacksonValue(cryptoService.findSortedCryptosByNormalizedRange(order));
     }
