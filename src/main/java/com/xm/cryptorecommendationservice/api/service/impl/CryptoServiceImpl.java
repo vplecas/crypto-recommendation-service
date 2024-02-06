@@ -34,7 +34,7 @@ public class CryptoServiceImpl implements CryptoService {
     public Optional<Crypto> findOldest(Symbol symbol) {
         Optional<Crypto> optCrypto = cryptoRepository.findOldest(symbol.name());
         if (optCrypto.isEmpty()) {
-            LOGGER.warn("There are no records for {} crypto.", symbol.name());
+            LOGGER.warn("There are no records for {} crypto.", symbol.getLabel());
             return Optional.empty();
         }
         return optCrypto;
@@ -44,7 +44,7 @@ public class CryptoServiceImpl implements CryptoService {
     public Optional<Crypto> findNewest(Symbol symbol) {
         Optional<Crypto> optCrypto = cryptoRepository.findNewest(symbol.name());
         if (optCrypto.isEmpty()) {
-            LOGGER.warn("There are no records for {} crypto.", symbol.name());
+            LOGGER.warn("There are no records for {} crypto.", symbol.getLabel());
             return Optional.empty();
         }
         return optCrypto;
@@ -54,7 +54,7 @@ public class CryptoServiceImpl implements CryptoService {
     public Optional<Crypto> findMin(Symbol symbol) {
         Optional<Crypto> optCrypto = cryptoRepository.findMin(symbol.name());
         if (optCrypto.isEmpty()) {
-            LOGGER.warn("There are no records for {} crypto.", symbol.name());
+            LOGGER.warn("There are no records for {} crypto.", symbol.getLabel());
             return Optional.empty();
         }
         return optCrypto;
@@ -64,7 +64,7 @@ public class CryptoServiceImpl implements CryptoService {
     public Optional<Crypto> findMax(Symbol symbol) {
         Optional<Crypto> optCrypto = cryptoRepository.findMax(symbol.name());
         if (optCrypto.isEmpty()) {
-            LOGGER.warn("There are no records for {} crypto.", symbol.name());
+            LOGGER.warn("There are no records for {} crypto.", symbol.getLabel());
             return Optional.empty();
         }
         return optCrypto;
@@ -94,7 +94,10 @@ public class CryptoServiceImpl implements CryptoService {
     public Entry<String, BigDecimal> findWithHighestNormalizedRange(LocalDate targetDate) {
         Map<String, BigDecimal> cryptos = new LinkedHashMap<>();
         for (Symbol symbol : Symbol.values()) {
-            cryptos.put(symbol.getLabel(), calculateNormalizedRange(symbol, targetDate));
+            BigDecimal normalisedRange = calculateNormalizedRange(symbol, targetDate);
+            if (ObjectUtils.isNotEmpty(normalisedRange)) {
+                cryptos.put(symbol.getLabel(), calculateNormalizedRange(symbol, targetDate));
+            }
         }
 
         if (cryptos.isEmpty()) {
