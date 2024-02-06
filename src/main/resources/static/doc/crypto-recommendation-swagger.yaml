@@ -152,7 +152,6 @@ paths:
                     type: string
                   normalizedRange:
                     type: number
-                    format: double
 
 components:
   schemas:
@@ -166,4 +165,3 @@ components:
           type: string
         price:
           type: number
-          format: double

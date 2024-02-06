@@ -2,7 +2,10 @@ package com.xm.cryptorecommendationservice.api.controller;
 
 import com.xm.cryptorecommendationservice.api.service.CryptoService;
 import com.xm.cryptorecommendationservice.common.converter.CaseInsensitiveDataConverter;
+import com.xm.cryptorecommendationservice.common.domain.Crypto;
 import com.xm.cryptorecommendationservice.common.domain.Symbol;
+import com.xm.cryptorecommendationservice.common.exception.NoDataFoundException;
+import com.xm.cryptorecommendationservice.common.mapper.CryptoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,22 +34,46 @@ public class CryptoController {
 
     @GetMapping("/{symbol}/oldest")
     private MappingJacksonValue findOldestCrypto(@PathVariable("symbol") Symbol symbol) {
-        return new MappingJacksonValue(cryptoService.findOldest(symbol));
+        Optional<Crypto> optCrypto = cryptoService.findOldest(symbol);
+
+        if (optCrypto.isEmpty()) {
+            throw new NoDataFoundException(String.format("There is no %s cryptocurrency", symbol.name()));
+        }
+
+        return new MappingJacksonValue(CryptoMapper.toDto(optCrypto.get()));
     }
 
     @GetMapping("/{symbol}/newest")
     private MappingJacksonValue findNewestCrypto(@PathVariable("symbol") Symbol symbol) {
-        return new MappingJacksonValue(cryptoService.findNewest(symbol));
+        Optional<Crypto> optCrypto = cryptoService.findNewest(symbol);
+
+        if (optCrypto.isEmpty()) {
+            throw new NoDataFoundException(String.format("There is no %s cryptocurrency", symbol.name()));
+        }
+
+        return new MappingJacksonValue(CryptoMapper.toDto(optCrypto.get()));
     }
 
     @GetMapping("/{symbol}/min")
     private MappingJacksonValue findMinCrypto(@PathVariable("symbol") Symbol symbol) {
-        return new MappingJacksonValue(cryptoService.findMin(symbol));
+        Optional<Crypto> optCrypto = cryptoService.findMin(symbol);
+
+        if (optCrypto.isEmpty()) {
+            throw new NoDataFoundException(String.format("There is no %s cryptocurrency", symbol.name()));
+        }
+
+        return new MappingJacksonValue(CryptoMapper.toDto(optCrypto.get()));
     }
 
     @GetMapping("/{symbol}/max")
     private MappingJacksonValue findMaxCrypto(@PathVariable("symbol") Symbol symbol) {
-        return new MappingJacksonValue(cryptoService.findMax(symbol));
+        Optional<Crypto> optCrypto = cryptoService.findMax(symbol);
+
+        if (optCrypto.isEmpty()) {
+            throw new NoDataFoundException(String.format("There is no %s cryptocurrency", symbol.name()));
+        }
+
+        return new MappingJacksonValue(CryptoMapper.toDto(optCrypto.get()));
     }
 
     @GetMapping("/highestNormalizedRange/{date}")

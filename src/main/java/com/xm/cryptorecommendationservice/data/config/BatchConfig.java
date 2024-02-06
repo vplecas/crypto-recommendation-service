@@ -3,7 +3,7 @@ package com.xm.cryptorecommendationservice.data.config;
 import com.xm.cryptorecommendationservice.common.domain.Crypto;
 import com.xm.cryptorecommendationservice.common.domain.CryptoDto;
 import com.xm.cryptorecommendationservice.common.repository.CryptoRepository;
-import com.xm.cryptorecommendationservice.data.mapper.CryptoFieldSetMapper;
+import com.xm.cryptorecommendationservice.common.mapper.CryptoFieldSetMapper;
 import com.xm.cryptorecommendationservice.data.policies.CryptoSkipPolicy;
 import com.xm.cryptorecommendationservice.data.processor.CryptoProcessor;
 import com.xm.cryptorecommendationservice.data.writer.CryptoWriter;

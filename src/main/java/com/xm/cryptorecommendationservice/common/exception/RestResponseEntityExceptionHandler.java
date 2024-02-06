@@ -14,6 +14,17 @@ public class RestResponseEntityExceptionHandler {
         return handleException(ex, HttpStatus.BAD_REQUEST, "illegalArgument");
     }
 
+    @ExceptionHandler({IllegalArgumentException.class})
+    protected ResponseEntity<Object> handleIllegalArgumentException(Exception ex) {
+        return handleException(ex, HttpStatus.BAD_REQUEST, "illegalArgument");
+    }
+
+    @ExceptionHandler({NoDataFoundException.class})
+    protected ResponseEntity<Object> handleNoDataFoundException(Exception ex) {
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(ex.getMessage(), headers, HttpStatus.NO_CONTENT);
+    }
+
     private ResponseEntity<Object> handleException(Exception ex, HttpStatus httpStatus, String code) {
         HttpHeaders headers = new HttpHeaders();
 

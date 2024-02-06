@@ -1,4 +1,4 @@
-package com.xm.cryptorecommendationservice.data.mapper;
+package com.xm.cryptorecommendationservice.common.mapper;
 
 import com.xm.cryptorecommendationservice.common.domain.CryptoDto;
 import com.xm.cryptorecommendationservice.common.domain.Symbol;
