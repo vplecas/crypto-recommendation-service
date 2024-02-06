@@ -75,6 +75,7 @@ public class CryptoServiceImpl implements CryptoService {
         if (StringUtils.isEmpty(order)) {
             throw new IllegalArgumentException("Order value must not be empty.");
         }
+
         Map<String, BigDecimal> cryptos = new LinkedHashMap<>();
         for (Symbol symbol : Symbol.values()) {
             BigDecimal normalizedRange = calculateNormalizedRange(symbol);

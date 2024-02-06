@@ -21,25 +21,20 @@ public class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler({NoDataFoundException.class})
     protected ResponseEntity<Object> handleNoDataFoundException(Exception ex) {
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(ex.getMessage(), headers, HttpStatus.NO_CONTENT);
+        return handleException(HttpStatus.NO_CONTENT);
     }
 
     private ResponseEntity<Object> handleException(Exception ex, HttpStatus httpStatus, String code) {
         HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(new Error(code, ex.getMessage()), headers, httpStatus);
+    }
 
-        Throwable mostSpecificCause = ex.getCause();
-        ErrorMessage errorMessage;
-
-        if (mostSpecificCause != null) {
-            String exceptionName = mostSpecificCause.getClass().getName();
-            String message = mostSpecificCause.getMessage();
-            errorMessage = new ErrorMessage(httpStatus.value(), exceptionName, message);
-        } else {
-            errorMessage = new ErrorMessage(httpStatus.value(), code, ex.getMessage());
-        }
-
-        return new ResponseEntity<>(errorMessage, headers, httpStatus);
+    private ResponseEntity<Object> handleException(HttpStatus httpStatus) {
+        HttpHeaders headers = new HttpHeaders();
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .headers(headers)
+                .build();
     }
 
 }

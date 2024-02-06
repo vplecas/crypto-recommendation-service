@@ -37,6 +37,8 @@ paths:
                       type: string
                     normalisedRange:
                       string: double
+        '204':
+          description: There is no content.
 
   /v1/crypto/{symbol}/oldest:
     get:
@@ -59,6 +61,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Crypto'
+        '204':
+          description: There is no content.
+        '400':
+          description: Error due to invalid user input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /v1/crypto/{symbol}/newest:
     get:
@@ -81,6 +91,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Crypto'
+        '204':
+          description: There is no content.
+        '400':
+          description: Error due to invalid user input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /v1/crypto/{symbol}/max:
     get:
@@ -103,6 +121,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Crypto'
+        '204':
+          description: There is no content.
+        '400':
+          description: Error due to invalid user input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /v1/crypto/{symbol}/min:
     get:
@@ -125,6 +151,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Crypto'
+        '204':
+          description: There is no content.
+        '400':
+          description: Error due to invalid user input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /v1/crypto/highestNormalizedRange/{date}:
     get:
@@ -152,6 +186,14 @@ paths:
                     type: string
                   normalizedRange:
                     type: number
+        '204':
+          description: There is no content for specified date.
+        '400':
+          description: Error due to invalid user input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   schemas:
@@ -165,3 +207,14 @@ components:
           type: string
         price:
           type: number
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
