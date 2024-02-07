@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crypto-service
+spec:
+  ports:
+    - name: crypto-service-port
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    name: crypto-app
+    app: onboarding-app
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crypto-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: crypto-app
+      app: onboarding-app
+  template:
+    metadata:
+      name: crypto-app-pod
+      labels:
+        name: crypto-app
+        app: onboarding-app
+    spec:
+      containers:
+        - name: crypto-app
+          image: crypto-recommendation-api:1.1.1
+          resources:
+            limits:
+              memory: 300Mi
+              cpu: 500m  # 500m = 1cpu
+          env:
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASSWORD
+              value: veljkosql
+            - name: DB_SERVER
+              value: crypto-db-service
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
