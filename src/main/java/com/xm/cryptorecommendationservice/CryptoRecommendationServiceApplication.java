@@ -9,5 +9,4 @@ public class CryptoRecommendationServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CryptoRecommendationServiceApplication.class, args);
 	}
-
 }

@@ -1,17 +1,23 @@
 version: "3.7"
 services:
-  mysqldb:
+  crypto-db:
     image: "mysql:latest"
     restart: always
     ports:
-      - 3306:3306
-#    networks:
-#      - springapimysql-net
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: cryptos
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
       MYSQL_ROOT_PASSWORD: admin
 
-#networks:
-#  springapimysql-net:
+  crypto-recommendation-service:
+    image: crypto-recommendation-api:1.1.1
+    ports:
+      - "8080:8080"
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - crypto-db
