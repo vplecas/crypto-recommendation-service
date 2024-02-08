@@ -52,6 +52,8 @@ kubectl port-forward svc/crypto-service 8080:8080
 http://localhost:8080/swagger-ui/#/
 ```
 
+After running the application, import postman collection and test endpoints.
+
 ### Future steps
 - Add integration tests.
 - Increase test coverage. Currently, test coverage only about is 20%.

@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "187618fe-1f9b-42fd-a6de-884539bf62db",
+		"name": "Crypto Recommendation Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13742756"
+	},
+	"item": [
+		{
+			"name": "Get Oldest Crypto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/crypto/btc/oldest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"crypto",
+						"btc",
+						"oldest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Newest Crypto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/crypto/xrp/newest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"crypto",
+						"xrp",
+						"newest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Min Price Crypto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/crypto/btc/min",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"crypto",
+						"btc",
+						"min"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Max Price Crypto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/crypto/btc/max",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"crypto",
+						"btc",
+						"max"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Crypto with highest normalize range",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/crypto/highestNormalizedRange/02-01-2022",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"crypto",
+						"highestNormalizedRange",
+						"02-01-2022"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cryptos by normalize ranges",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/crypto/sorted/asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"crypto",
+						"sorted",
+						"asc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
