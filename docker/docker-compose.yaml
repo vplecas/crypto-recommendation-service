@@ -6,10 +6,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: cryptos
-      MYSQL_USER: root
-      MYSQL_PASSWORD: veljkosql
-      MYSQL_ROOT_PASSWORD: veljkosql
+      MYSQL_DATABASE: "cryptos"
+      MYSQL_USER: "veljko"
+      MYSQL_PASSWORD: "veljkosql"
+      MYSQL_ROOT_PASSWORD: "veljkosql"
 
   crypto-recommendation-service:
     image: crypto-recommendation-api:1.1.1
@@ -22,6 +22,6 @@ services:
     depends_on:
       - crypto-db
     environment:
-      MYSQL_USER: veljko
-      MYSQL_PASSWORD: veljkosql
-      DB_SERVER: crypto-db:3306
+      MYSQL_USER: "veljko"
+      MYSQL_PASSWORD: "veljkosql"
+      DB_SERVER: "crypto-db:3306"
